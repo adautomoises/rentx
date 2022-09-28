@@ -1,7 +1,9 @@
 import React from 'react';
-import { Accessory } from '../../components/Accessory';
 import { BackButton } from '../../components/BackButton';
 import { Slider } from '../../components/Slider';
+import { Accessory } from '../../components/Accessory';
+import { Button } from '../../components/Button';
+
 
 import speedSvg from '../../assets/speed.svg';
 import accelerationSvg from '../../assets/acceleration.svg';
@@ -23,7 +25,8 @@ import {
   Period,
   Price,
   About,
-  Accessories
+  Accessories,
+  Footer
 } from './styles';
 
 export function CarDetails(){
@@ -34,7 +37,7 @@ export function CarDetails(){
       </Header>
       <CarImages>
         <Slider 
-          imageUrl= {['https://www.webmotors.com.br/imagens/prod/348415/AUDI_RS5_2.9_V6_TFSI_GASOLINA_SPORTBACK_QUATTRO_STRONIC_34841510442727128.webp?s=fill&w=236&h=135&q=70&t=true']} 
+          imageUrl= {['https://www.webmotors.com.br/imagens/prod/348272/LAMBORGHINI_HURACAN_5.2_V10_GASOLINA_LP_640_EVO_SPYDER_LDF_34827202075115677.webp?s=fill&w=130&h=97&q=70&t=true)']} 
         />
       </CarImages>
     
@@ -42,7 +45,7 @@ export function CarDetails(){
         <Details>
           <Description>
             <Brand>Lamborghini</Brand>
-            <Name>Huracan</Name>
+            <Name>Huracán</Name>
           </Description>
           <Rent>
             <Period>Ao dia</Period>
@@ -66,6 +69,10 @@ export function CarDetails(){
           carro para quem gosta de acelerar.
         </About>
       </Content>
+
+      <Footer>
+        <Button title="Escolher período do aluguel"/>
+      </Footer>
 
     </Container>
   );
