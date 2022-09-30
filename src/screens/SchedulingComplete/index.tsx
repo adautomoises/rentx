@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { useWindowDimensions } from 'react-native';
 import { StatusBar } from 'react-native';
 
@@ -16,6 +17,10 @@ import { ConfirmButton } from '../../components/ConfirmButton';
 
 export function SchedulingComplete(){
   const { width } = useWindowDimensions();
+  const navigation = useNavigation();
+  function handleConfirm(){
+    navigation.navigate('Home');
+  }
   return (
     <Container>
       <StatusBar 
@@ -36,7 +41,10 @@ export function SchedulingComplete(){
         </Message>
       </Content>
       <Footer>
-        <ConfirmButton title='OK'/>
+        <ConfirmButton 
+          title='OK' 
+          onPress={handleConfirm}
+        />
       </Footer>
     </Container>
   );
