@@ -19,12 +19,12 @@ import {
 } from './styles';
 
 export function Home(){
-  const [cars, setCars] = React.useState<CarDTO>();
+  const [cars, setCars] = React.useState<CarDTO[]>([]);
   const [loading, setLoading] = React.useState(true);
   const navigation = useNavigation();
 
-  function handleCarDetails(){
-    navigation.navigate('CarDetails');
+  function handleCarDetails(car: CarDTO){
+    navigation.navigate('CarDetails', { car });
   }
 
 
@@ -67,7 +67,7 @@ export function Home(){
           data={cars}
           keyExtractor={ item => item.id}
           renderItem={({ item }) => 
-            <Car data={item} onPress={handleCarDetails} />
+            <Car data={item} onPress={()=> {handleCarDetails(item)}} />
           }
         />
       }
