@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { NavigationHelpersContext, useNavigation } from '@react-navigation/native';
 import { BackButton } from '../../components/BackButton';
 import { Slider } from '../../components/Slider';
 import { Accessory } from '../../components/Accessory';
@@ -36,11 +36,14 @@ export function CarDetails(){
   function handleConfirmRental(){
     navigation.navigate('Scheduling');
   }
+  function handleBack(){
+    navigation.goBack();
+  }
 
   return (
     <Container>
       <Header>
-        <BackButton onPress={() => {}}/>
+        <BackButton onPress={handleBack}/>
       </Header>
       <CarImages>
         <Slider 
