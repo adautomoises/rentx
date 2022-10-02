@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { Alert } from 'react-native';
 
 import { BackButton } from '../../components/BackButton';
 import { Slider } from '../../components/Slider';
@@ -9,6 +10,7 @@ import { CarDTO } from '../../dtos/CarDTO';
 import { getAccessoryIcon } from '../../utils/getAccessoryIcon'
 import { format, parseISO } from 'date-fns';
 
+import api from '../../services/api';
 
 import { Feather } from '@expo/vector-icons';
 import { RFValue } from 'react-native-responsive-fontsize';
@@ -60,8 +62,20 @@ export function SchedulingDetails(){
 
   const rentTotal = Number(dates.length * car.rent.price);
 
-  function handleConfirmRental(){
-    navigation.navigate('SchedulingComplete');
+  async function handleConfirmRental(){
+    const schedulesByCar = await api.get(`/schedules_bycars/${car.id}`)
+
+    const unavailable_dates = [
+      ...schedulesByCar.data.unavailable_dates,
+      ...dates
+    ];
+
+    await api.put(`/schedules_bycars/${car.id}`, {
+      id: car.id,
+      unavailable_dates
+    })
+    .then(() => navigation.navigate('SchedulingComplete'))
+    .catch(() => Alert.alert("Não foi possível confirmar o agendamento."))
   }
 
   function handleBack(){
