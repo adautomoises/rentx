@@ -23,7 +23,7 @@ import {
 
 export function Scheduling() {
   const [ lastSelectedDate, setLastSelectedDate ] = React.useState<DayProps>({} as DayProps);
-  const [ markedDates, setMarkedDates ] = React.useState();
+  const [ markedDates, setMarkedDates ] = React.useState({});
 
 
   const theme = useTheme();
