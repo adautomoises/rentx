@@ -1,7 +1,14 @@
 import React from 'react';
-import { StatusBar, Button, StyleSheet } from 'react-native';
+import { StatusBar, Button, StyleSheet, Dimensions } from 'react-native';
 
-import Animated, { useSharedValue, useAnimatedStyle } from 'react-native-reanimated';
+import Animated, { 
+  useSharedValue, 
+  useAnimatedStyle,
+  withTiming,
+  Easing
+} from 'react-native-reanimated';
+
+const WIDTH = Dimensions.get('window').width;
 
 import {
   Container
@@ -11,12 +18,15 @@ export function Splash(){
   const animation = useSharedValue(0);
   const animatedStyles = useAnimatedStyle(() => {
     return {
-      transform: [{translateX: animation.value}]
+      transform: [{translateX: withTiming(animation.value, {
+        duration: 500,
+        easing: Easing.bezier(1,0,0,1)
+      })}]
     }
   })
 
   function handleAnimationPosition(){
-    animation.value = Math.random()*100;
+    animation.value = Math.random()*(WIDTH-100);
   }
 
   return (
