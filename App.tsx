@@ -2,7 +2,7 @@ import React from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import { ThemeProvider } from 'styled-components';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-
+import { View } from 'react-native';
 
 import {
   useFonts,
@@ -29,12 +29,18 @@ export default function App() {
     Archivo_500Medium,
     Archivo_600SemiBold
   });
+  
   if(fontsLoaded){
     SplashScreen.hideAsync();
   }
+
   if(!fontsLoaded){
-    return null
-  }
+    return (
+      <View style={{flex: 1, backgroundColor: theme.colors.header}}>
+      </View>
+    )
+  }  
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider theme={theme}>

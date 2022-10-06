@@ -62,9 +62,9 @@ export function Splash(){
   React.useEffect(()=>{
     splashAnimation.value = withTiming(
       50, 
-      { duration: 1000 },
+      { duration: 2000 },
       () => {
-        'worklet'
+        'worklet';
         runOnJS(startApp)();
       }
       );
@@ -77,10 +77,20 @@ export function Splash(){
           translucent
           backgroundColor= "transparent"
       />
-      <Animated.View style={[brandStyle, {position: 'absolute'}]}>
+      <Animated.View style={
+        [
+          brandStyle, 
+          {position: 'absolute'}
+        ]
+        }>
         <BrandSvg width={80} height={50} />
       </Animated.View>
-      <Animated.View style={[logoStyle, {position: 'absolute'}]}>
+      <Animated.View style={
+        [
+          logoStyle, 
+          {position: 'absolute'}
+          ]
+        }>
         <LogoSvg width={180} height={20} />
       </Animated.View>
     </Container>
