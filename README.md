@@ -16,7 +16,7 @@
 
  -  [ x ] Criação das Interfaces
  -  [ x ] Criação da Navegação
- -  [   ] Consumo de API
+ -  [ x ] Consumo de API
  -  [   ] Criação das Animações
 
 
