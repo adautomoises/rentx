@@ -4,8 +4,6 @@ import { TextInput } from 'react-native';
 
 export const Container = styled.View`
   flex-direction: row;
-
-  margin-bottom: 8px;
 `;
 
 export const IconContainer = styled.View`
@@ -16,6 +14,16 @@ export const IconContainer = styled.View`
   align-items: center;
 
   margin-right: 2px;
+
+  background-color: ${({theme}) => theme.colors.background_secondary};
+`;
+
+export const IconContainerPassword = styled.View`
+  width: 55px;
+  height: 56px;
+
+  justify-content: center;
+  align-items: center;
 
   background-color: ${({theme}) => theme.colors.background_secondary};
 `;
