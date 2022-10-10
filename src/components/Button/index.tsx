@@ -1,25 +1,25 @@
 import React from 'react';
 import { ActivityIndicator } from 'react-native';
 import { useTheme } from 'styled-components';
-import { RectButtonProps } from 'react-native-gesture-handler';
+import { TouchableOpacityProps } from 'react-native';
 
 import {
   Container,
   Title
 } from './styles';
 
-interface Props extends RectButtonProps {
+interface Props extends TouchableOpacityProps {
   title: string;
   color?: string;
   loading: boolean;
   light?: boolean;
+  onPress: () => void;
 }
 
 export function Button({
   title, 
   color,
   onPress,
-  enabled = true,
   loading = false,
   light = false
 }: Props){
@@ -30,8 +30,6 @@ export function Button({
     <Container
       color={color ? color : theme.colors.main}
       onPress={onPress}
-      enabled={enabled}
-      style={{ opacity: !enabled ? .5 : 1}}
     >
       {
         loading ?
