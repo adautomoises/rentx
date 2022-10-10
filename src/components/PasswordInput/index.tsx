@@ -41,8 +41,8 @@ export function PasswordInput({
   }
 
   return (
-    <Container isFocused={isFocused}>
-      <IconContainer>
+    <Container>
+      <IconContainer isFocused={isFocused}>
         <Feather 
           name={iconName}
           size={24}
@@ -50,6 +50,7 @@ export function PasswordInput({
         />
       </IconContainer>
       <InputText {...rest}
+        isFocused={isFocused}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
         secureTextEntry={isPasswordVisible}
