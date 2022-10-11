@@ -28,8 +28,11 @@ export function SignIn(){
   const [ password, setPassword ] = React.useState('');
 
   const navigation = useNavigation();
-  function startApp(){
+  function handleSkip(){
     navigation.navigate('Home');
+  };
+  function handleSignUp(){
+    navigation.navigate('SignUpFirstStep');
   };
 
   async function handleSignIn(){
@@ -100,7 +103,7 @@ export function SignIn(){
             />
             <Button 
               title = "Criar conta gratuida"
-              onPress = {()=>{}}
+              onPress = {handleSignUp}
               loading = {false}
               color = {theme.colors.background_secondary}
               disabled={false}
@@ -108,7 +111,7 @@ export function SignIn(){
             />
             <Button 
               title = "Pular Cadastro"
-              onPress = {startApp}
+              onPress = {handleSkip}
               loading = {false}
               color = {theme.colors.success}
               disabled={false}
