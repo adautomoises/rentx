@@ -13,6 +13,7 @@ interface Props extends TouchableOpacityProps {
   color?: string;
   loading: boolean;
   light?: boolean;
+  disabled: boolean;
   onPress: () => void;
 }
 
@@ -20,6 +21,7 @@ export function Button({
   title, 
   color,
   onPress,
+  disabled = true,
   loading = false,
   light = false
 }: Props){
@@ -30,6 +32,8 @@ export function Button({
     <Container
       color={color ? color : theme.colors.main}
       onPress={onPress}
+      disabled={disabled}
+      style={{ opacity: (disabled || loading ) ? .5 : 1}}
     >
       {
         loading ?

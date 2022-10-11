@@ -153,6 +153,7 @@ export function CarDetails(){
           title="Escolher período do aluguel"
           onPress={handleConfirmRental} 
           loading={false}
+          disabled={false}
         />
       </Footer>
 

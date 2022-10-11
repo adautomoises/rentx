@@ -96,12 +96,14 @@ export function SignIn(){
               title = "Login"
               onPress = {handleSignIn}
               loading = {false}
+              disabled={false}
             />
             <Button 
               title = "Criar conta gratuida"
               onPress = {()=>{}}
               loading = {false}
               color = {theme.colors.background_secondary}
+              disabled={false}
               light
             />
             <Button 
@@ -109,6 +111,7 @@ export function SignIn(){
               onPress = {startApp}
               loading = {false}
               color = {theme.colors.success}
+              disabled={false}
             />
           </Footer>
         </Container>
