@@ -1,9 +1,7 @@
 import React from 'react';
 import { 
   StatusBar, 
-  KeyboardAvoidingView, 
-  TouchableWithoutFeedback, 
-  Keyboard,
+  KeyboardAvoidingView,
   Alert
 } from 'react-native';
 import * as Yup from 'yup'; 
@@ -57,7 +55,6 @@ export function SignIn(){
 
   return (
     <KeyboardAvoidingView behavior='position' enabled>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <Container>
           <StatusBar 
             barStyle='dark-content'
@@ -117,7 +114,6 @@ export function SignIn(){
             />
           </Footer>
         </Container>
-      </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
 }
