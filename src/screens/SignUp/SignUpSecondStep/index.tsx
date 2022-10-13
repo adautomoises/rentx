@@ -7,6 +7,7 @@ import {
   Alert
 } from 'react-native';
 
+import { Confirmation } from '../../Confirmation'
 import { BackButton } from '../../../components/BackButton';
 import { Bullet } from '../../../components/Bullet';
 import { PasswordInput } from '../../../components/PasswordInput';
@@ -51,7 +52,11 @@ export function SignUpSecondStep(){
     if(password != passwordConfirm){
       return Alert.alert('As senhas não são iguais');
     }
-    
+    navigation.navigate('Confirmation', {
+      nextScreenRoute: 'SignIn',
+      title: 'Conta Criada!',
+      message: `Agora é só fazer login\ne aproveitar.`
+    });
   }
 
   return (
