@@ -63,7 +63,6 @@ export function SignIn(){
             barStyle='dark-content'
             backgroundColor={theme.colors.background_primary}
             translucent
-            
           />
           <Header>
             <Title>
