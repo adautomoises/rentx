@@ -1,9 +1,10 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import theme from '../../../styles/theme';
 import {
   StatusBar,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Alert
 } from 'react-native';
 
 import { BackButton } from '../../../components/BackButton';
@@ -21,13 +22,37 @@ import {
   FormTitle
 } from './styles';
 
+interface Params {
+  user: {
+    name: string;
+    email: string; 
+    driverLicense: string;
+  }
+}
 
 export function SignUpSecondStep(){
+  const [ password, setPassword ] = React.useState('');
+  const [ passwordConfirm, setPasswordConfirm ] = React.useState('');
+
   const navigation = useNavigation();
+  const route = useRoute();
+
+  const { user } = route.params as Params;
 
   function handleBack(){
     navigation.goBack();
   };
+
+  function handleRegister(){
+    if(!password || !passwordConfirm){
+      return Alert.alert('Informe a senha e a confirmação.');
+    }
+    
+    if(password != passwordConfirm){
+      return Alert.alert('As senhas não são iguais');
+    }
+    
+  }
 
   return (
     <KeyboardAvoidingView behavior='position' enabled>
@@ -57,11 +82,15 @@ export function SignUpSecondStep(){
             <FormTitle>2. Senha</FormTitle>
             <PasswordInput 
               iconName='lock'
-              placeholder='Senha'         
+              placeholder='Senha'
+              onChangeText={setPassword}
+              value={password}
             />
             <PasswordInput 
               iconName='lock'      
               placeholder='Repetir Senha'
+              onChangeText={setPasswordConfirm}
+              value={passwordConfirm}
             />
           </Form>
           <Button 
@@ -69,7 +98,7 @@ export function SignUpSecondStep(){
             color={theme.colors.success}
             loading={false} 
             disabled={false} 
-            onPress={()=>{}}
+            onPress={handleRegister}
           />
         </Container>
     </KeyboardAvoidingView>
