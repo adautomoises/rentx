@@ -1,5 +1,5 @@
 import { getBottomSpace, getStatusBarHeight } from 'react-native-iphone-x-helper';
-import { RFValue, RFPercentage } from 'react-native-responsive-fontsize';
+import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -54,7 +54,7 @@ export const Brand = styled.Text`
 export const Name = styled.Text`
   font-family: ${({ theme }) => theme.fonts.secondary_500};
   color: ${({ theme }) => theme.colors.title};
-  font-size: ${RFValue(25)}px;
+  font-size: 25px;
 `;
 
 export const Rent = styled.View``;
@@ -70,7 +70,7 @@ export const Period = styled.Text`
 export const Price = styled.Text`
   font-family: ${({ theme }) => theme.fonts.secondary_500};
   color: ${({ theme }) => theme.colors.main};
-  font-size: ${RFValue(25)}px;
+  font-size: 25px;
 `;
 
 export const Accessories = styled.View`

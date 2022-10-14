@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { Alert } from 'react-native';
+import { Alert, StatusBar } from 'react-native';
 
 import { BackButton } from '../../components/BackButton';
 import { Slider } from '../../components/Slider';
@@ -61,7 +61,7 @@ export function SchedulingDetails(){
   const route = useRoute();
   const { car, dates } = route.params as Params;
 
-  const rentTotal = Number(dates.length * car.rent.price);
+  const rentTotal = Number(dates.length * car.price);
 
   async function handleConfirmRental(){
     const schedulesByCar = await api.get(`/schedules_bycars/${car.id}`)
@@ -110,6 +110,11 @@ export function SchedulingDetails(){
 
   return (
     <Container>
+      <StatusBar 
+        barStyle="dark-content"
+        translucent
+        backgroundColor= "transparent"
+      />
       <Header>
         <BackButton onPress={handleBack}/>
       </Header>
@@ -126,8 +131,8 @@ export function SchedulingDetails(){
             <Name>{car.name}</Name>
           </Description>
           <Rent>
-            <Period>{car.rent.period}</Period>
-            <Price>R$ {car.rent.price}</Price>
+            <Period>{car.period}</Period>
+            <Price>R$ {car.price}</Price>
           </Rent>
         </Details>
 
@@ -172,7 +177,7 @@ export function SchedulingDetails(){
         <RentalPrice>
           <RentalPriceLabel>TOTAL</RentalPriceLabel>
           <RentalPriceDetails>
-            <RentalPriceQuota>{`R$ ${car.rent.price} x${dates.length} diarías`}</RentalPriceQuota>
+            <RentalPriceQuota>{`R$ ${car.price} x${dates.length} diarías`}</RentalPriceQuota>
             <RentalPriceTotal>R$ {rentTotal}</RentalPriceTotal>
           </RentalPriceDetails>
 

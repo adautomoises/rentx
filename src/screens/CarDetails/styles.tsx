@@ -44,7 +44,7 @@ export const Brand = styled.Text`
 export const Name = styled.Text`
   font-family: ${({ theme }) => theme.fonts.secondary_500};
   color: ${({ theme }) => theme.colors.title};
-  font-size: ${RFValue(25)}px;
+  font-size: 25px;
 `;
 
 export const Rent = styled.View``;
@@ -60,13 +60,13 @@ export const Period = styled.Text`
 export const Price = styled.Text`
   font-family: ${({ theme }) => theme.fonts.secondary_500};
   color: ${({ theme }) => theme.colors.main};
-  font-size: ${RFValue(25)}px;
+  font-size: 25px;
 `;
 
 export const About = styled.Text`
   font-family: ${({ theme }) => theme.fonts.primary_400};
   color: ${({ theme }) => theme.colors.text};
-  font-size: ${RFValue(15)}px;
+  font-size: 15px;
   text-align: justify;
 
   margin-top: ${RFValue(23)}px;
