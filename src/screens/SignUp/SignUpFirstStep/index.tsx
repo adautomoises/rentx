@@ -23,12 +23,10 @@ import {
   FormTitle
 } from './styles';
 
-
 export function SignUpFirstStep(){
   const [ name, setName ] = React.useState('');
   const [ email, setEmail ] = React.useState('');
   const [ driverLicense, setDriverLicense ] = React.useState('');
-
   const navigation = useNavigation();
 
   function handleBack(){

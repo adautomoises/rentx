@@ -4,6 +4,8 @@ import { ThemeProvider } from 'styled-components';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { View } from 'react-native';
 
+import { AppProvider } from './src/hooks';
+
 import {
   useFonts,
   Inter_400Regular,
@@ -44,7 +46,9 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider theme={theme}>
+        <AppProvider>
           <Routes />
+        </AppProvider>
       </ThemeProvider>
     </GestureHandlerRootView>  
   );

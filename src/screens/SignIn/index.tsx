@@ -12,6 +12,8 @@ import { PasswordInput } from '../../components/PasswordInput';
 import { Button } from '../../components/Button';
 import theme from '../../styles/theme';
 
+import { useAuth } from '../../hooks/auth';
+
 import {
   Container,
   Header,
@@ -24,6 +26,8 @@ import {
 export function SignIn(){
   const [ email, setEmail ] = React.useState('');
   const [ password, setPassword ] = React.useState('');
+
+  const { signIn } = useAuth();
 
   const navigation = useNavigation();
   function handleSkip(){
@@ -42,7 +46,10 @@ export function SignIn(){
           .required('E-mail obrigatório')
           .email('Digite um e-mail válido'),
       });
+      
       await schema.validate({ email, password });
+      signIn({ email, password});
+
     } catch (error) {
       if(error instanceof Yup.ValidationError){
         return Alert.alert('Opa', error.message)
