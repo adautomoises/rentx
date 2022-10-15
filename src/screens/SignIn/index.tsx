@@ -112,13 +112,6 @@ export function SignIn(){
               disabled={false}
               light
             />
-            <Button 
-              title = "Pular Cadastro"
-              onPress = {handleSkip}
-              loading = {false}
-              color = {theme.colors.success}
-              disabled={false}
-            />
           </Footer>
         </Container>
     </KeyboardAvoidingView>
