@@ -3,23 +3,23 @@ import { StatusBar, KeyboardAvoidingView, Keyboard } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { BorderlessButtonProps, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useTheme } from 'styled-components';
+import { Feather } from '@expo/vector-icons';
 
 import { BackButton } from '../../components/BackButton';
-import { LogOutButton } from '../../components/LogOutButton';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
-import CameraSvg from '../../assets/camera.svg';
 
 import { useAuth } from '../../hooks/auth';
 
 import {
   Container,
   Header,
-  HeaderContainer,
+  HeaderTop,
   HeaderTitle,
-  AvatarProfileContainer,
-  AvatarProfile,
-  ChangeAvatarProfile,
+  LogOutButton,
+  PhotoContainer,
+  Photo,
+  PhotoButton,
   WrapperDatas,
   FormDatas,
   HeaderFormDatas,
@@ -30,7 +30,7 @@ import {
   Footer
 } from './styles';
 
-export function Profile({ ...rest }: BorderlessButtonProps){
+export function Profile(){
   const { user } = useAuth();
   const [ name, setName ] = React.useState('');
   const [ email, setEmail ] = React.useState('');
@@ -46,6 +46,10 @@ export function Profile({ ...rest }: BorderlessButtonProps){
   function handleBack(){
     navigation.navigate('Home');
   };
+  function handleSignOut(){
+
+  };
+
   function handleChangeFormDatas() {
     setActive(prevState => !prevState);
   };
@@ -66,36 +70,42 @@ export function Profile({ ...rest }: BorderlessButtonProps){
       behavior='position' enabled
       keyboardVerticalOffset={60}
     >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <Container {...rest}>
+      <TouchableWithoutFeedback 
+        onPress={Keyboard.dismiss}
+      >
+        <Container>
           <StatusBar 
             barStyle='light-content'
             backgroundColor={theme.colors.header}
             translucent
           />
           <Header>
-            <HeaderContainer>
+            <HeaderTop>
               <BackButton
                 onPress={handleBack}
                 color={theme.colors.shape}
               />
-              <HeaderTitle>Editar Perfil</HeaderTitle>
-              <LogOutButton 
-                onPress={() => {}}
-                color={theme.colors.text}
-              />
-            </HeaderContainer>
-          </Header>
 
-          <AvatarProfileContainer>
-            <AvatarProfile>{user.avatar}</AvatarProfile>
-            <ChangeAvatarProfile>
-              <CameraSvg 
-                width={24}
-                height={24}
-              />
-            </ChangeAvatarProfile>
-          </AvatarProfileContainer>
+              <HeaderTitle>Editar Perfil</HeaderTitle>
+
+              <LogOutButton onPress={handleSignOut}>
+                <Feather 
+                  name="power" size={24}
+                  color={theme.colors.shape}
+                />
+              </LogOutButton> 
+            </HeaderTop>
+            <PhotoContainer>
+              <Photo source={{uri: "https://github.com/adautomoises.png"}} />
+              <PhotoButton onPress={()=>{}}>
+                <Feather 
+                  name="camera"
+                  size={24}
+                  color={theme.colors.shape}
+                />
+              </PhotoButton>
+            </PhotoContainer>
+          </Header>
 
           <WrapperDatas>
             <FormDatas>
