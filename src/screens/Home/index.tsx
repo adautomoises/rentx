@@ -28,17 +28,25 @@ export function Home(){
   }
 
   React.useEffect(()=> {
+    let isMounted = true;
     async function fetchCars(){
       try{
         const response = await api.get('/cars');
-        setCars(response.data);
+        if(isMounted){
+          setCars(response.data);
+        }
       } catch (e) {
         console.log(e)
       } finally {
-        setLoading(false);
+        if(isMounted){
+          setLoading(false);
+        }
       }
     }
     fetchCars();
+    return () => {
+      isMounted = false;
+    }
   }, []);
 
   return (
