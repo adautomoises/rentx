@@ -2,10 +2,6 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
 
-interface ImageIndexProps {
-  active: boolean;
-}
-
 export const Container = styled.View`
   width: 100%;
 `;
@@ -27,6 +23,4 @@ export const CarImageWrapper = styled.View`
 export const CarImage = styled.Image`
   width: ${RFValue(280)}px;
   height: ${RFValue(132)}px;
-
-
 `;

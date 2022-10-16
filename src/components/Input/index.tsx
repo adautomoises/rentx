@@ -12,12 +12,13 @@ import {
 interface InputProps extends TextInputProps {
   iconName: React.ComponentProps<typeof Feather>['name'];
   value?: string;
+  firstValue?: string;
 }
-
 
 export function Input({
   iconName,
   value,
+  firstValue,
   ...rest
 }: InputProps){
   const theme = useTheme();
@@ -45,6 +46,7 @@ export function Input({
         />
       </IconContainer>
       <InputText {...rest}
+        value={firstValue}
         isFocused={isFocused}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}

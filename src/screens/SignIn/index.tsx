@@ -30,9 +30,7 @@ export function SignIn(){
   const { signIn } = useAuth();
 
   const navigation = useNavigation();
-  function handleSkip(){
-    navigation.navigate('Home');
-  };
+  
   function handleSignUp(){
     navigation.navigate('SignUpFirstStep');
   };
