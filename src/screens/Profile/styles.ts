@@ -1,9 +1,9 @@
 import { BorderlessButton, GestureHandlerRootView, RectButton } from 'react-native-gesture-handler';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
-import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
-import styled from 'styled-components/native';
+import { RFValue } from 'react-native-responsive-fontsize';
+import styled, { css } from 'styled-components/native';
 
-interface Props {
+interface OptionProps {
   active: boolean;
 }
 
@@ -67,63 +67,34 @@ export const PhotoButton = styled(RectButton)`
   background-color: ${({theme}) => theme.colors.main};
 `;
 
-export const WrapperDatas = styled.View`
-  width: 100%;
-
-  margin-top: ${RFPercentage(15)}px;
+export const Content = styled.View`
+  padding: 0 24px;
+  margin-top: 122px;
 `;
 
-export const FormDatas = styled.View`  
-  justify-content: center;
-  align-items: center;
+export const Options = styled.View`
+  border-bottom-width: 1px;
+  border-bottom-color: ${({theme}) => theme.colors.line};
 
-  padding: 24px;
-`;
-
-export const HeaderFormDatas = styled.View`
-  width: 100%;
-  
   flex-direction: row;
   justify-content: space-around;
-  align-items: center;
 
-  border-bottom-width: 1px;
-  border-bottom-color: ${({theme}) => theme.colors.shape};
   margin-bottom: 24px;
 `;
 
-export const FormData = styled(RectButton)``;
+export const Option = styled.TouchableOpacity<OptionProps>`
+  padding-bottom: 14px;
 
-export const FormDataTitle = styled.Text<Props>`
-  height: ${RFValue(38)}px;
-
-  color: ${({theme}) => theme.colors.title};
-  font-family: ${({theme}) => theme.fonts.secondary_600};
-  font-size: 20px;
-
-  border-bottom-color: ${({theme, active}) => 
-  active ? theme.colors.main : 'none'};
-  border-bottom-width: ${({active}) => 
-  active ? 2 : 0 }px;
+  ${({ active }) => active && css`
+    border-bottom-width: 2px;
+    border-bottom-color: ${({theme}) => theme.colors.main};
+  `}
 `;
 
-export const FormPassword = styled(RectButton)``;
-
-export const FormPasswordTitle = styled.Text<Props>`
-  height: ${RFValue(38)}px;
-
-  color: ${({theme}) => theme.colors.title};
-  font-family: ${({theme}) => theme.fonts.secondary_600};
-  font-size: 20px;
-  
-  border-bottom-color: ${({theme, active}) => 
-  active ? theme.colors.main : 'none'};
-  border-bottom-width: ${({active}) => 
-  active ? 2 : 0 }px;
-`;
-
-export const Footer = styled.View`
-  width: 100%;
-  padding: 24px;
-  padding-top: 0;
+export const OptionTitle = styled.Text<OptionProps>`
+  font-size: ${RFValue(20)}px;
+  font-family: ${({theme, active}) => active ? 
+  theme.fonts.secondary_600 : theme.fonts.secondary_500};
+  color: ${({theme, active}) => active ? 
+  theme.colors.header : theme.colors.text_detail};
 `;
