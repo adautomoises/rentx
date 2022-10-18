@@ -2,10 +2,15 @@ import React from 'react';
 import { StatusBar, KeyboardAvoidingView, Keyboard } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+
+import { useAuth } from '../../hooks/auth';
 import { useTheme } from 'styled-components';
 import { Feather } from '@expo/vector-icons';
 
 import { BackButton } from '../../components/BackButton';
+import { Input } from '../../components/Input';
+import { PasswordInput } from '../../components/PasswordInput';
 
 import {
   Container,
@@ -19,7 +24,8 @@ import {
   Content,
   Options,
   Option,
-  OptionTitle
+  OptionTitle,
+  Section
 } from './styles';
 
 export function Profile(){
@@ -27,6 +33,7 @@ export function Profile(){
 
   const navigation = useNavigation();
   const theme = useTheme();
+  const { user } = useAuth();
 
   function handleBack(){
     navigation.navigate('Home');
@@ -42,7 +49,6 @@ export function Profile(){
   return (
     <KeyboardAvoidingView 
       behavior='position' enabled
-      keyboardVerticalOffset={60}
     >
       <TouchableWithoutFeedback 
         onPress={Keyboard.dismiss}
@@ -81,7 +87,7 @@ export function Profile(){
             </PhotoContainer>
           </Header>
 
-          <Content>
+          <Content style={{ marginBottom: useBottomTabBarHeight()}}>
             <Options>
               <Option
                 active={option === 'dataEdit'}
@@ -100,6 +106,42 @@ export function Profile(){
                 </OptionTitle>
               </Option>
             </Options>
+            { option === 'dataEdit' ?
+              <Section>
+                <Input 
+                  iconName='user'
+                  placeholder='Nome'
+                  autoCorrect={false}
+                  defaultValue={user.name}
+                />
+                <Input 
+                  iconName='mail'
+                  editable={false}
+                  defaultValue={user.email}
+                />
+                <Input 
+                  iconName='credit-card'
+                  placeholder='CNH'
+                  keyboardType='numeric'
+                  defaultValue={user.driver_license}
+                />
+              </Section>
+              :
+              <Section>
+                <PasswordInput 
+                  iconName='lock'
+                  placeholder='Senha atual'
+                />
+                <PasswordInput 
+                  iconName='lock'
+                  placeholder='Nova senha'
+                />
+                <PasswordInput 
+                  iconName='lock'
+                  placeholder='Repetir senha'
+                />
+              </Section>
+            }
           </Content>
 
         </Container>

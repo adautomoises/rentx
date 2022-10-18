@@ -98,3 +98,5 @@ export const OptionTitle = styled.Text<OptionProps>`
   color: ${({theme, active}) => active ? 
   theme.colors.header : theme.colors.text_detail};
 `;
+
+export const Section = styled.View``;
