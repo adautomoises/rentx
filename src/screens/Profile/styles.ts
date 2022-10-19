@@ -79,7 +79,6 @@ export const Options = styled.View`
   flex-direction: row;
   justify-content: space-around;
 
-  margin-bottom: 24px;
 `;
 
 export const Option = styled.TouchableOpacity<OptionProps>`
@@ -99,4 +98,6 @@ export const OptionTitle = styled.Text<OptionProps>`
   theme.colors.header : theme.colors.text_detail};
 `;
 
-export const Section = styled.View``;
+export const Section = styled.View`
+  margin-bottom: 24px;
+`;
