@@ -30,7 +30,7 @@ import {
 } from './styles';
 
 export function Profile(){
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
 
   const [ option, setOption ] = React.useState<'dataEdit' | 'passwordEdit'>('dataEdit');
   const [ name, setName ] = React.useState(user.name);
@@ -42,9 +42,6 @@ export function Profile(){
 
   function handleBack(){
     navigation.navigate('Home');
-  };
-  function handleSignOut(){
-
   };
 
   function handleOptionChange(optionSelected: 'dataEdit' | 'passwordEdit'){
@@ -86,7 +83,7 @@ export function Profile(){
 
               <HeaderTitle>Editar Perfil</HeaderTitle>
 
-              <LogOutButton onPress={handleSignOut}>
+              <LogOutButton onPress={signOut}>
                 <Feather 
                   name="power" size={24}
                   color={theme.colors.shape}
