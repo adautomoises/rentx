@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import * as Yup from 'yup';
+import { useNetInfo } from '@react-native-community/netinfo';
 
 import { useAuth } from '../../hooks/auth';
 import { useTheme } from 'styled-components';
@@ -33,7 +34,7 @@ import {
 
 export function Profile(){
   const { user, signOut, updatedUser } = useAuth();
-
+  const netInfo = useNetInfo();
   const [ option, setOption ] = React.useState<'dataEdit' | 'passwordEdit'>('dataEdit');
   const [ name, setName ] = React.useState(user.name);
   const [ avatar, setAvatar ] = React.useState(user.avatar);
@@ -47,7 +48,11 @@ export function Profile(){
   };
 
   function handleOptionChange(optionSelected: 'dataEdit' | 'passwordEdit'){
-    setOption(optionSelected);
+    if(netInfo.isConnected === false && optionSelected === 'passwordEdit'){
+      Alert.alert('Você está Offline','Conecte-se a Internet para mudar a senha.');
+    } else {
+      setOption(optionSelected);
+    }
   };
 
   async function handleAvatarSelect(){
