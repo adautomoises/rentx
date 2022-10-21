@@ -2,12 +2,15 @@ import React from 'react';
 import { StatusBar } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useNavigation } from '@react-navigation/native';
+import { useNetInfo } from '@react-native-community/netinfo';
+import { synchronize } from '@nozbe/watermelondb/sync';
 
+import api from '../../services/api';
+import { database } from '../../database';
+import { Car as ModelCar } from '../../database/model/Car';
 import Logo from '../../assets/logo.svg';
 import { Car } from '../../components/Car';
 import { LoadAnimation } from '../../components/LoadAnimation';
-
-import api from '../../services/api';
 import { CarDTO } from '../../dtos/CarDTO';
 
 import {
@@ -19,24 +22,45 @@ import {
 } from './styles';
 
 export function Home(){
-  const [cars, setCars] = React.useState<CarDTO[]>([]);
+  const [cars, setCars] = React.useState<ModelCar[]>([]);
   const [loading, setLoading] = React.useState(true);
   const navigation = useNavigation();
 
+  const netInfo = useNetInfo();
+
   function handleCarDetails(car: CarDTO){
     navigation.navigate('CarDetails', { car });
-  }
+  };
 
-  React.useEffect(()=> {
+  async function offlineSynchronize(){
+    await synchronize({
+      database,
+      pullChanges: async ({ lastPulledAt }) => {
+        const response = await api
+        .get(`cars/sync/pull?lastPulledVersion=${lastPulledAt || 0}`);
+
+        const { changes, latestVersion } = response.data;
+        return { changes, timestamp: latestVersion }
+      },
+      pushChanges: async ({ changes }) => {
+        const user = changes.users;
+        await api.post('/users/sync', user).catch(console.log);
+      }
+    });
+  };
+
+  React.useEffect(() => {
     let isMounted = true;
     async function fetchCars(){
       try{
-        const response = await api.get('/cars');
+        const carCollection = database.get<ModelCar>('cars');
+        const cars = await carCollection.query().fetch();
+
         if(isMounted){
-          setCars(response.data);
+          setCars(cars);
         }
-      } catch (e) {
-        console.log(e)
+      } catch (error) {
+        console.log(error)
       } finally {
         if(isMounted){
           setLoading(false);
@@ -49,6 +73,12 @@ export function Home(){
     }
   }, []);
 
+  React.useEffect(() => {
+    if(netInfo.isConnected === true){
+      offlineSynchronize();
+    }
+  },[netInfo.isConnected])
+
   return (
     <Container>
       <StatusBar 
@@ -56,6 +86,7 @@ export function Home(){
         backgroundColor='transparent'
         translucent
       />
+
       <Header>
         <HeaderContent>
           <Logo 
