@@ -1,54 +1,59 @@
-import { BorderlessButton } from 'react-native-gesture-handler';
+import { BorderlessButton, GestureHandlerRootView, RectButton } from 'react-native-gesture-handler';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
-import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
-import styled from 'styled-components/native';
+import { RFValue } from 'react-native-responsive-fontsize';
+import styled, { css } from 'styled-components/native';
 
-interface Props {
+interface OptionProps {
   active: boolean;
 }
 
-export const Container = styled.View``;
+export const Container = styled(GestureHandlerRootView)`
+  background-color: ${({theme}) => theme.colors.background_primary};
+`;
 
 export const Header = styled.View`
-  height: ${RFPercentage(30)}px;
+  width: 100%;
+  height: ${RFValue(200)}px;
 
-  padding-top:  62px;
-  padding-top: ${getStatusBarHeight() + 30}px;
+  padding: 0 24px;
+  align-items: center; 
 
   background-color: ${({theme}) => theme.colors.header};
 `;
 
-export const HeaderContainer = styled.View`
+export const HeaderTop = styled.View`
+  width: 100%;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+
+  margin-top: ${getStatusBarHeight() + 32}px;
 `;
 
 export const HeaderTitle = styled.Text`
-  color: ${({theme}) => theme.colors.background_secondary};
+  font-size: ${RFValue(25)}px;
   font-family: ${({theme}) => theme.fonts.secondary_600};
-  font-size: 25px;
+  color: ${({theme}) => theme.colors.background_secondary};
 `;
 
-export const AvatarProfileContainer = styled.View`
-  width: 100%;
+export const LogOutButton = styled(BorderlessButton)``;
 
-  align-items: center;
-  position: absolute;
-
-  margin-top: ${RFPercentage(20)}px;
-`;
-
-export const AvatarProfile = styled.View`
+export const PhotoContainer = styled.View`
   width: 180px;
   height: 180px;
 
   border-radius: 90px;
-  border-width: 1px;
-  background-color: ${({theme}) => theme.colors.background_primary};
+  background-color: ${({theme}) => theme.colors.shape};
+  margin-top: 48px;
 `;
 
-export const ChangeAvatarProfile = styled(BorderlessButton)`
+export const Photo = styled.Image`
+  width: 180px;
+  height: 180px;
+  border-radius: 90px;
+`;
+
+export const PhotoButton = styled(RectButton)`
   width: 40px;
   height: 40px;
 
@@ -56,69 +61,43 @@ export const ChangeAvatarProfile = styled(BorderlessButton)`
   align-items: center;
 
   position: absolute;
-  right: ${RFPercentage(15)}px;
-  bottom: 0;
+  right: 10px;
+  bottom: 10px;
 
   background-color: ${({theme}) => theme.colors.main};
 `;
 
-export const WrapperDatas = styled.View`
-  width: 100%;
-
-  margin-top: ${RFPercentage(15)}px;
+export const Content = styled.View`
+  padding: 0 24px;
+  margin-top: 122px;
 `;
 
-export const FormDatas = styled.View`  
-  justify-content: center;
-  align-items: center;
+export const Options = styled.View`
+  border-bottom-width: 1px;
+  border-bottom-color: ${({theme}) => theme.colors.line};
 
-  padding: 24px;
-`;
-
-export const HeaderFormDatas = styled.View`
-  width: 100%;
-  
   flex-direction: row;
   justify-content: space-around;
-  align-items: center;
 
-  border-bottom-width: 1px;
-  border-bottom-color: ${({theme}) => theme.colors.shape};
+`;
+
+export const Option = styled.TouchableOpacity<OptionProps>`
+  padding-bottom: 14px;
+
+  ${({ active }) => active && css`
+    border-bottom-width: 2px;
+    border-bottom-color: ${({theme}) => theme.colors.main};
+  `}
+`;
+
+export const OptionTitle = styled.Text<OptionProps>`
+  font-size: ${RFValue(20)}px;
+  font-family: ${({theme, active}) => active ? 
+  theme.fonts.secondary_600 : theme.fonts.secondary_500};
+  color: ${({theme, active}) => active ? 
+  theme.colors.header : theme.colors.text_detail};
+`;
+
+export const Section = styled.View`
   margin-bottom: 24px;
-`;
-
-export const FormData = styled(BorderlessButton)``;
-
-export const FormDataTitle = styled.Text<Props>`
-  height: ${RFValue(38)}px;
-
-  color: ${({theme}) => theme.colors.title};
-  font-family: ${({theme}) => theme.fonts.secondary_600};
-  font-size: 20px;
-
-  border-bottom-color: ${({theme, active}) => 
-  active ? theme.colors.main : 'none'};
-  border-bottom-width: ${({active}) => 
-  active ? 2 : 0 }px;
-`;
-
-export const FormPassword = styled(BorderlessButton)``;
-
-export const FormPasswordTitle = styled.Text<Props>`
-  height: ${RFValue(38)}px;
-
-  color: ${({theme}) => theme.colors.title};
-  font-family: ${({theme}) => theme.fonts.secondary_600};
-  font-size: 20px;
-  
-  border-bottom-color: ${({theme, active}) => 
-  active ? theme.colors.main : 'none'};
-  border-bottom-width: ${({active}) => 
-  active ? 2 : 0 }px;
-`;
-
-export const Footer = styled.View`
-  width: 100%;
-  padding: 24px;
-  padding-top: 0;
 `;

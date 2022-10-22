@@ -21,16 +21,6 @@ export const CarImages = styled.View`
   margin-top: ${getStatusBarHeight() + RFValue(32)}px;
 `;
 
-export const Content = styled.ScrollView.attrs({
-  contentContainerStyle: {
-    padding: 24,
-    alignItems: 'center'
-  },
-  showsVerticalScrollIndicator: false
-})`
-
-`;
-
 export const Details = styled.View`
   width: 100%;
 
@@ -133,6 +123,7 @@ export const RentalPrice = styled.View`
   width: 100%;
 
   margin-top: 16px;
+  padding-bottom: 24px;
 `;
 
 export const RentalPriceLabel = styled.Text`

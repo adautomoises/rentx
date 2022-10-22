@@ -3,6 +3,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { ThemeProvider } from 'styled-components';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { View } from 'react-native';
+import { LogBox } from 'react-native';
 
 import { AppProvider } from './src/hooks';
 
@@ -42,6 +43,10 @@ export default function App() {
       </View>
     )
   }  
+
+  LogBox.ignoreLogs([
+    'Non-serializable values were found in the navigation state',
+  ]);
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>

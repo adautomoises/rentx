@@ -5,12 +5,15 @@ import { useAuth } from '../hooks/auth';
 import { AppTabRoutes } from './app.tab.routes';
 import { AuthRoutes } from './auth.routes';
 
+import { Brand } from '../screens/Brand'; 
+
 export function Routes(){
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
 
   return (
+    loading ? <Brand /> :
     <NavigationContainer>
-      { user ? <AppTabRoutes /> : <AuthRoutes /> }
+      { user.id ? <AppTabRoutes /> : <AuthRoutes /> }
     </NavigationContainer>
   );
 }
