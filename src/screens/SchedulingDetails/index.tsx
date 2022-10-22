@@ -10,6 +10,7 @@ import { Button } from '../../components/Button';
 import { CarDTO } from '../../dtos/CarDTO';
 import { getAccessoryIcon } from '../../utils/getAccessoryIcon'
 import { format, parseISO } from 'date-fns';
+import { useNetInfo } from '@react-native-community/netinfo';
 
 import api from '../../services/api';
 
@@ -62,6 +63,9 @@ interface Params {
 };
 
 export function SchedulingDetails() {
+  const [ carUpdated, setCarUpdated ] = React.useState<CarDTO>({} as CarDTO);
+  const netInfo = useNetInfo();
+
   const [loading, setLoading] = React.useState(false);
   const [rentalPeriod, setRentalPeriod] = React.useState<RentalPeriod>({} as RentalPeriod);
 
@@ -101,25 +105,14 @@ export function SchedulingDetails() {
   });
 
   async function handleConfirmRental() {
-    const schedulesByCar = await api.get(`/schedules_bycars/${car.id}`)
-
-    const unavailable_dates = [
-      ...schedulesByCar.data.unavailable_dates,
-      ...dates
-    ];
-
-    await api.post('schedules_byuser', {
-      user_id: 1,
-      car,
-      startDate: format(parseISO(dates[0]), "dd/MM/yyyy"),
-      endDate: format(parseISO(dates[dates.length - 1]), "dd/MM/yyyy")
-    });
-
     setLoading(true);
 
-    await api.put(`/schedules_bycars/${car.id}`, {
-      id: car.id,
-      unavailable_dates
+    await api.post('rentals', {
+      user_id: 1,
+      car_id: car.id,
+      start_date: new Date(dates[0]),
+      end_date: new Date(dates[dates.length - 1]),
+      total: rentTotal
     })
       .then(() => {
         navigation.navigate('Confirmation', {
@@ -145,6 +138,18 @@ export function SchedulingDetails() {
     });
   }, []);
 
+  React.useEffect(() => {
+    async function fetchCarUpdated(){
+      const response = await api.get(`/cars/${car.id}`);
+      setCarUpdated(response.data);
+    };
+    
+    if(netInfo.isConnected === true){
+      fetchCarUpdated();
+    };
+
+  },[netInfo.isConnected]);
+
   return (
     <Container>
       <StatusBar
@@ -165,7 +170,10 @@ export function SchedulingDetails() {
         <CarImages>
           <Animated.View style={[sliderAnimationStyle]}>
             <Slider
-              imageUrl={car.photos}
+              imageUrl= {
+                !!carUpdated.photos ?
+                carUpdated.photos : [{ id: car.thumbnail, photo: car.thumbnail }]
+              }
             />
           </Animated.View>
         </CarImages>
@@ -191,17 +199,20 @@ export function SchedulingDetails() {
           </Rent>
         </Details>
 
-        <Accessories>
-          {
-            car.accessories.map(accessory => (
-              <Accessory
-                key={accessory.type}
-                name={accessory.name}
-                icon={getAccessoryIcon(accessory.type)}
-              />
-            ))
-          }
-        </Accessories>
+        {
+          carUpdated.accessories &&
+          <Accessories>  
+            {
+              carUpdated.accessories.map(accessory => (
+                <Accessory 
+                  key={accessory.type}
+                  name={accessory.name}
+                  icon={getAccessoryIcon(accessory.type)}
+                />
+              ))
+            }
+          </Accessories>
+        }
 
         <RentalPeriod>
           <CalendarIcon>

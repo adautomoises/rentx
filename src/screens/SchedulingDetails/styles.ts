@@ -123,6 +123,7 @@ export const RentalPrice = styled.View`
   width: 100%;
 
   margin-top: 16px;
+  padding-bottom: 24px;
 `;
 
 export const RentalPriceLabel = styled.Text`
