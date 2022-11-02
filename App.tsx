@@ -46,6 +46,7 @@ export default function App() {
 
   LogBox.ignoreLogs([
     'Non-serializable values were found in the navigation state',
+    'Possible Unhandled Promise Rejection'
   ]);
 
   return (

@@ -7,7 +7,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 import { LoadAnimation } from '../../components/LoadAnimation';
 
-import { format, parseISO } from 'date-fns';
+import { addHours, format, parseISO } from 'date-fns';
 import { Car as ModelCar } from '../../database/model/Car';
 import { Car } from '../../components/Car';
 import api from '../../services/api';
@@ -55,8 +55,8 @@ export function MyCars(){
           return {
             id: data.id,
             car: data.car,
-            start_date: format(parseISO(data.start_date), 'dd/MM/yyyy'),
-            end_date: format(parseISO(data.start_date), 'dd/MM/yyyy')
+            start_date: format(addHours(parseISO(data.start_date), 3), 'dd/MM/yyyy'),
+            end_date: format(addHours(parseISO(data.end_date), 3), 'dd/MM/yyyy')
           }
         });
 
