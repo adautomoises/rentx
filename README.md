@@ -1,13 +1,14 @@
 # rentx
-<p align="center">
-  <img src="src/assets/rentx_video1.gif">
-</p><p align="center">
 
-  <img src="src/assets/rentx_video2.gif">
-</p>
-<p align="center">
-  <img src="src/assets/rentx_video3.gif">
-</p>
+<br />
+  <div align="center">
+    <img src="src/assets/Capa.png" style="border: 1px solid rgba(0, 0, 0, 0.1);" width="1090" height="720"></img>
+  </div>
+<br />
+  <div align="center">
+    Fonte: <a href="https://www.figma.com/file/AomhtJeVKDKr6B26Jd8VfI/RentX-Ignite---Offline-First-(Copy)?node-id=14%3A861">Design RentX Figma</a>
+  </div> 
+<br />
 
 > O aplicativo rentx traz uma interface amigável e moderna para aluguéis de automóveis, sendo possível ver detalhes de cada um dos carros disponíveis e agendar as datas de início e fim do aluguel com preços que cabem no seu bolso!
 
@@ -30,9 +31,14 @@ Além disto é bom ter um editor para trabalhar com o código como [VSCode](http
 
 É possível executar um emulador do [Android Studio](https://developer.android.com/studio) ou utilizar o aplicativo Expo Go no Smartphone.
 
+Para inicializar o servidor da aplicação será necessário clonar o repositório [RentX API](https://github.com/adautomoises/rentx-api.git) e executar os comandos a seguir
+```
+npm install && npm start
+```
+
 ## 🚀 Instalando RentX
 
-Para instalar o RentX, siga estas etapas:
+Para instalar o RentX siga estas etapas:
 
 Clone o repositório na sua pasta de preferência.
 ```
@@ -45,7 +51,12 @@ npm install
 ```
 Após instalação das dependências, pode usar o comando abaixo para executar a aplicação no Emulador ou no seu Smartphone.
 ```
-npx expo start
+npx react-native start
+```
+Abra outro terminal e build o APP em seu Emulador e/ou Startphone utilizando do comando. <br />
+OBS: Faz-se necessário o servidor ([RentX API](https://github.com/adautomoises/rentx-api.git)) estar rodando.
+```
+npx react-native run-android
 ```
 
 ## 📝 Licença
@@ -53,9 +64,7 @@ npx expo start
 Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
  
  
-### Feito com ❤️ por Adauto Moisés 👋🏽 Entre em contato! 
+### Desenvolvido por Adauto Moisés ❤️ Entre em contato comigo em meu <a href="https://www.linkedin.com/posts/adautomoises_opa-eu-estou-de-volta-com-mais-um-projeto-activity-6984350479040299008-mh49?utm_source=share&utm_medium=member_desktop" alt="linkedin" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=flat-square&logo=linkedin&logoColor=white"></a>! 
  
-<a href="https://www.linkedin.com/posts/adautomoises_opa-eu-estou-de-volta-com-mais-um-projeto-activity-6984350479040299008-mh49?utm_source=share&utm_medium=member_desktop" alt="linkedin" target="_blank">
-  <img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=flat-square&logo=linkedin&logoColor=white">
-</a>
+
  
